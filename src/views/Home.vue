@@ -1,38 +1,42 @@
 <template>
   <div>
-    Home page with streams
-    <v-btn @click="getInfo">
-      User info
-    </v-btn>
-
-    <p>{{ username }}</p>
-    <p>{{ id }}</p>
+    <StreamerBar :username="username" :profile-picture="pictureUrl" />
   </div>
 </template>
 
 <script>
 import { isAuthenticated } from "./../plugins/twitch-service";
+import StreamerBar from "@/components/StreamerBar.vue";
 
 export default {
   name: "Home",
+  components: {
+    StreamerBar
+  },
   data() {
     return {
       id: null,
-      username: ""
+      username: "",
+      pictureUrl: "",
+      authenticated: isAuthenticated()
     };
   },
   async mounted() {
-    if (isAuthenticated()) {
-      const userInfo = await this.$userInfo();
-      const { sub, preferred_username } = userInfo.data;
-
-      this.id = sub;
-      this.username = preferred_username;
-    }
+    this.getUserInfo();
   },
   methods: {
-    async getInfo() {
-      await this.$userInfo();
+    async getUserInfo() {
+      if (isAuthenticated()) {
+        const userInfo = await this.$userInfo();
+        const { sub, preferred_username, pictureUrl } = userInfo.data;
+
+        this.id = sub;
+        this.username = preferred_username;
+        this.pictureUrl = pictureUrl;
+      }
+    },
+    getStreams() {
+
     }
   }
 };
