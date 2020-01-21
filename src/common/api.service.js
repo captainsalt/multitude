@@ -9,7 +9,7 @@ export default function install(Vue) {
   Vue.prototype.$get = resourse => axios.get(resourse);
 
   Vue.prototype.$setToken = token => {
-    Vue.axios.defaults.headers = {
+    axios.defaults.headers = {
       "Authorization: ": `Token: ${token}`
     };
   };

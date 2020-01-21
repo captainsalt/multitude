@@ -9,8 +9,8 @@
 <script>
 export default {
   methods: {
-    oauth() {
-
+    async oauth() {
+      window.location.href = process.env.VUE_APP_AUTH_URL;
     }
   }
 };
