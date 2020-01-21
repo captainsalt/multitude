@@ -3,10 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
-import ApiService from "@/common/api.service";
+import TwitchService from "./plugins/twitch-service";
 
 Vue.config.productionTip = false;
-Vue.use(ApiService);
+Vue.use(TwitchService);
 
 new Vue({
   router,
