@@ -27,7 +27,15 @@ const routes = [
   {
     path: "/auth",
     name: "auth",
-    component: () => import("@/views/Auth.vue")
+    component: () => import("@/views/Auth.vue"),
+    beforeEnter: (to, from, next) => {
+      if (isAuthenticated()) {
+        next("/");
+      }
+      else {
+        next();
+      }
+    }
   }
 ];
 
