@@ -11,9 +11,18 @@
 export default {
   mounted() {
     if (location.hash) {
-      const token = location.hash.split("=")[1];
-      this.$setToken(token);
-      localStorage.setItem("token", token);
+      const params = location.hash
+        .split("#")[1]
+        .split("&");
+
+      for (const param of params) {
+        const [key, value] = param.split("=");
+
+        if (key === "id_token" || key === "access_token") {
+          localStorage.setItem(key, value);
+        }
+      }
+
       this.$router.push("/");
     }
     else {

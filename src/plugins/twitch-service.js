@@ -1,22 +1,32 @@
 import axios from "axios";
 
-export default function install(Vue) {
-  axios.defaults.baseURL = "https://api.twitch.tv/helix";
-  axios.defaults.headers = {
+const twitchApiClient = axios.create({
+  baseURL: "https://api.twitch.tv/helix",
+  headers: {
     "Client-ID": process.env.VUE_APP_CLIENT_ID
+  }
+});
+
+export default function install(Vue) {
+  Vue.prototype.$get = resourse => twitchApiClient.get(resourse);
+
+  Vue.prototype.$userInfo = () => {
+    axios.get("https://id.twitch.tv/oauth2/userinfo", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+      }
+    });
   };
 
-  Vue.prototype.$get = resourse => axios.get(resourse);
-
   Vue.prototype.$setToken = token => {
-    axios.defaults.headers = {
-      "Authorization: ": `Token: ${token}`
+    twitchApiClient.defaults.headers = {
+      Authorization: `Bearer ${token}`
     };
   };
 }
 
 export function isAuthenticated() {
-  if (localStorage.getItem("token")) {
+  if (localStorage.getItem("id_token")) {
     return true;
   }
 
