@@ -10,13 +10,11 @@ const twitchApiClient = axios.create({
 export default function install(Vue) {
   Vue.prototype.$get = resourse => twitchApiClient.get(resourse);
 
-  Vue.prototype.$userInfo = () => {
-    axios.get("https://id.twitch.tv/oauth2/userinfo", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`
-      }
-    });
-  };
+  Vue.prototype.$userInfo = () => axios.get("https://id.twitch.tv/oauth2/userinfo", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
 
   Vue.prototype.$setToken = token => {
     twitchApiClient.defaults.headers = {
