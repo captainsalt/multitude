@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import { setToken } from "@/services/twitch-service.js";
-
 export default {
   mounted() {
     if (location.hash) {
@@ -20,12 +18,15 @@ export default {
       for (const param of params) {
         const [key, value] = param.split("=");
 
-        if (key === "id_token" || key === "access_token") {
-          if (key === "access_token") {
-            setToken(value);
-          }
-
-          localStorage.setItem(key, value);
+        switch (key) {
+          case "id_token":
+            this.$store.commit("setIdToken", value);
+            break;
+          case "access_token":
+            this.$store.commit("setAccessToken", value);
+            break;
+          default:
+            break;
         }
       }
 
