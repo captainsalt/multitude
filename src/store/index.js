@@ -5,11 +5,6 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 const persistStatePlugin = createPersistedState({
-  storage: {
-    getItem: key => localStorage.getItem(key),
-    setItem: (key, value) => localStorage.setItem(key, value),
-    removeItem: key => localStorage.remove(key)
-  },
   paths: [
     "access_token",
     "id_token"
