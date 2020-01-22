@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { setAccessToken } from "@/services/twitch-service.js";
+
 export default {
   mounted() {
     if (location.hash) {
@@ -24,6 +26,7 @@ export default {
             break;
           case "access_token":
             this.$store.commit("setAccessToken", value);
+            setAccessToken(value);
             break;
           default:
             break;
