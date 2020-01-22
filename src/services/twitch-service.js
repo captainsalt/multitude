@@ -15,9 +15,9 @@ export const getUserInfo = () => axios.get("https://id.twitch.tv/oauth2/userinfo
 
 export const getFollowedStreams = fromId => twitchApiClient.get(`/users/follows?first=100&from_id=${fromId}`);
 
-export const getStreamStatus = ids => {
-  const query = ids
-    .map(d => `user_id=${d.to_id}`)
+export const getStreamStatus = followedStreams => {
+  const query = followedStreams
+    .map(followedStream => `user_id=${followedStream.to_id}`)
     .join("&");
 
   return twitchApiClient.get(`/streams?user_id=${query}`);
