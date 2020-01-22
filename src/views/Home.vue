@@ -1,6 +1,10 @@
 <template>
   <div>
-    <StreamerBar :username="username" :profile-picture="pictureUrl" :streamers="streamerData" />
+    <StreamerBar ref="streamerBar" :username="username" :profile-picture="pictureUrl" :streamers="streamerData" />
+    <v-btn @click="displayStreamerBar()">
+      Show
+    </v-btn>
+
     <v-btn href="/login">
       Login
     </v-btn>
@@ -43,6 +47,9 @@ export default {
       const followedStreams = await twitch.getFollowedStreams(this.id);
       const streamStatus = await twitch.getStreamStatus(followedStreams.data.data);
       this.streamerData = streamStatus.data.data;
+    },
+    displayStreamerBar() {
+      this.$refs.streamerBar.$data.show = !this.$refs.streamerBar.$data.show;
     }
   }
 };

@@ -1,22 +1,7 @@
 <template>
   <nav>
-    <v-container>
-      <v-row
-        align="center"
-        justify="left"
-      >
-        <v-btn
-          color="purple"
-          dark
-          @click.stop="drawer = !drawer"
-        >
-          Toggle
-        </v-btn>
-      </v-row>
-    </v-container>
-
     <v-navigation-drawer
-      v-model="drawer"
+      v-model="show"
       absolute
       temporary
     >
@@ -72,7 +57,7 @@ export default {
   },
   data() {
     return {
-      drawer: null
+      show: false
     };
   }
 };
