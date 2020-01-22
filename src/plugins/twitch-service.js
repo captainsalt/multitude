@@ -16,6 +16,16 @@ export default function install(Vue) {
     }
   });
 
+  Vue.prototype.$getFollowedStreams = fromId => twitchApiClient.get(`/users/follows?first=100&from_id=${fromId}`);
+
+  Vue.prototype.$getStreamData = ids => {
+    const query = ids
+      .map(d => `user_id=${d.to_id}`)
+      .join("&");
+
+    return twitchApiClient.get(`/streams?user_id=${query}`);
+  };
+
   Vue.prototype.$setToken = token => {
     twitchApiClient.defaults.headers = {
       Authorization: `Bearer ${token}`

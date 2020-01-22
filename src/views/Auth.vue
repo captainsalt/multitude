@@ -19,6 +19,10 @@ export default {
         const [key, value] = param.split("=");
 
         if (key === "id_token" || key === "access_token") {
+          if (key === "access_token") {
+            this.$setToken(value);
+          }
+
           localStorage.setItem(key, value);
         }
       }

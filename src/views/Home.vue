@@ -1,6 +1,9 @@
 <template>
   <div>
     <StreamerBar :username="username" :profile-picture="pictureUrl" />
+    <v-btn href="/login">
+      Login
+    </v-btn>
   </div>
 </template>
 
@@ -18,11 +21,13 @@ export default {
       id: null,
       username: "",
       pictureUrl: "",
-      authenticated: isAuthenticated()
+      authenticated: isAuthenticated(),
+      streamerNames: []
     };
   },
   async mounted() {
-    this.getUserInfo();
+    await this.getUserInfo();
+    await this.getStreams();
   },
   methods: {
     async getUserInfo() {
@@ -35,8 +40,10 @@ export default {
         this.pictureUrl = pictureUrl;
       }
     },
-    getStreams() {
-
+    async getStreams() {
+      const followedStreams = await this.$getFollowedStreams(this.id);
+      const streamStatus = await this.$getStreamData(followedStreams.data.data);
+      this.streamerNames = streamStatus.data.data.map(u => u.user_name);
     }
   }
 };
