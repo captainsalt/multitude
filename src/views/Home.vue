@@ -1,7 +1,7 @@
 <template>
   <div>
     <StreamerBar ref="streamerBar" :username="username" :profile-picture="pictureUrl" :streamers="streamerData" />
-    <v-btn @click="displayStreamerBar()">
+    <v-btn @click="displayStreamerBar">
       Show
     </v-btn>
 
