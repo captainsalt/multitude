@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StreamerBar :username="username" :profile-picture="pictureUrl" />
+    <StreamerBar :username="username" :profile-picture="pictureUrl" :streamers="streamerNames" />
     <v-btn href="/login">
       Login
     </v-btn>
@@ -21,7 +21,6 @@ export default {
       id: null,
       username: "",
       pictureUrl: "",
-      authenticated: isAuthenticated(),
       streamerNames: []
     };
   },
@@ -43,7 +42,7 @@ export default {
     async getStreams() {
       const followedStreams = await this.$getFollowedStreams(this.id);
       const streamStatus = await this.$getStreamData(followedStreams.data.data);
-      this.streamerNames = streamStatus.data.data.map(u => u.user_name);
+      this.streamerNames = streamStatus.data.data;
     }
   }
 };

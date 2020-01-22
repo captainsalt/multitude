@@ -34,16 +34,17 @@
 
       <v-list dense>
         <v-list-item
-          v-for="item in items"
-          :key="item.title"
+          v-for="streamer in streamers"
+          :key="streamer.user_id"
           link
         >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+          <!-- <v-list-item-icon>
+            <v-icon>{{ streamer.username }}</v-icon>
+          </v-list-item-icon> -->
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ streamer.user_name }}</v-list-item-title>
+            {{ streamer.title }}
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -61,6 +62,12 @@ export default {
     profilePicture: {
       "type": String,
       "default": require("@/assets/logo.png")
+    },
+    streamers: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
   data() {
