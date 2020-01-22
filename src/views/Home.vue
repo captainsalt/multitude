@@ -29,19 +29,19 @@ export default {
     };
   },
   async mounted() {
-    await this.getUserInfo();
-    await this.getStreams();
+    if (twitch.isAuthenticated()) {
+      await this.getUserInfo();
+      await this.getStreams();
+    }
   },
   methods: {
     async getUserInfo() {
-      if (twitch.isAuthenticated()) {
-        const userInfo = await twitch.getUserInfo();
-        const { sub, preferred_username, pictureUrl } = userInfo.data;
+      const userInfo = await twitch.getUserInfo();
+      const { sub, preferred_username, pictureUrl } = userInfo.data;
 
-        this.id = sub;
-        this.username = preferred_username;
-        this.pictureUrl = pictureUrl;
-      }
+      this.id = sub;
+      this.username = preferred_username;
+      this.pictureUrl = pictureUrl;
     },
     async getStreams() {
       const followedStreams = await twitch.getFollowedStreams(this.id);
