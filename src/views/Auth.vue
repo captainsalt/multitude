@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { setToken } from "@/services/twitch-service.js";
+
 export default {
   mounted() {
     if (location.hash) {
@@ -20,7 +22,7 @@ export default {
 
         if (key === "id_token" || key === "access_token") {
           if (key === "access_token") {
-            this.$setToken(value);
+            setToken(value);
           }
 
           localStorage.setItem(key, value);

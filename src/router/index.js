@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import { isAuthenticated } from "../plugins/twitch-service";
+import { isAuthenticated } from "@/services/twitch-service.js";
 
 Vue.use(VueRouter);
 

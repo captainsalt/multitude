@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { isAuthenticated } from "./../plugins/twitch-service";
+import * as twitch from "@/services/twitch-service.js";
 import StreamerBar from "@/components/StreamerBar.vue";
 
 export default {
@@ -30,8 +30,8 @@ export default {
   },
   methods: {
     async getUserInfo() {
-      if (isAuthenticated()) {
-        const userInfo = await this.$userInfo();
+      if (twitch.isAuthenticated()) {
+        const userInfo = await twitch.getUserInfo();
         const { sub, preferred_username, pictureUrl } = userInfo.data;
 
         this.id = sub;
@@ -40,8 +40,8 @@ export default {
       }
     },
     async getStreams() {
-      const followedStreams = await this.$getFollowedStreams(this.id);
-      const streamStatus = await this.$getStreamData(followedStreams.data.data);
+      const followedStreams = await twitch.getFollowedStreams(this.id);
+      const streamStatus = await twitch.getStreamStatus(followedStreams.data.data);
       this.streamerNames = streamStatus.data.data;
     }
   }
