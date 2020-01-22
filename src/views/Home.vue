@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StreamerBar :username="username" :profile-picture="pictureUrl" :streamers="streamerNames" />
+    <StreamerBar :username="username" :profile-picture="pictureUrl" :streamers="streamerData" />
     <v-btn href="/login">
       Login
     </v-btn>
@@ -21,7 +21,7 @@ export default {
       id: null,
       username: "",
       pictureUrl: "",
-      streamerNames: []
+      streamerData: []
     };
   },
   async mounted() {
@@ -42,7 +42,7 @@ export default {
     async getStreams() {
       const followedStreams = await twitch.getFollowedStreams(this.id);
       const streamStatus = await twitch.getStreamStatus(followedStreams.data.data);
-      this.streamerNames = streamStatus.data.data;
+      this.streamerData = streamStatus.data.data;
     }
   }
 };
