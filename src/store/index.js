@@ -6,23 +6,27 @@ Vue.use(Vuex);
 
 const persistStatePlugin = createPersistedState({
   paths: [
-    "access_token",
-    "id_token"
+    "accessToken",
+    "idToken",
+    "activeStreams"
   ]
 });
 
 export default new Vuex.Store({
   state: {
-    access_token: "",
-    id_token: ""
+    accessToken: "",
+    idToken: "",
+    activeStreams: []
   },
   getters: {
-    getAccessToken: state => state.access_token,
-    getIdToken: state => state.id_token
+    getAccessToken: state => state.accessToken,
+    getIdToken: state => state.idToken,
+    getActiveStreams: state => state.activeStreams
   },
   mutations: {
-    setAccessToken: (state, payload) => state.access_token = payload,
-    setIdToken: (state, payload) => state.id_token = payload
+    setAccessToken: (state, payload) => state.accessToken = payload,
+    setIdToken: (state, payload) => state.idToken = payload,
+    setActiveStreams: (state, payload) => state.activeStreams = payload
   },
   actions: {
   },
