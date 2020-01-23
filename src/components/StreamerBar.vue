@@ -17,11 +17,16 @@
 
       <v-divider />
 
-      <v-list dense>
+      <v-list-item-group
+        v-model="selected"
+        dense
+        multiple
+        active-class="pink--text"
+      >
         <v-list-item
           v-for="streamer in streamers"
           :key="streamer.user_id"
-          link
+          :value="streamer.user_id"
         >
           <!-- <v-list-item-icon>
             <v-icon>{{ streamer.username }}</v-icon>
@@ -32,7 +37,7 @@
             {{ streamer.title }}
           </v-list-item-content>
         </v-list-item>
-      </v-list>
+      </v-list-item-group>
     </v-navigation-drawer>
   </nav>
 </template>
@@ -49,15 +54,14 @@ export default {
       "default": require("@/assets/logo.png")
     },
     streamers: {
-      type: Array,
-      default() {
-        return [];
-      }
+      "type": Array,
+      "default": () => []
     }
   },
   data() {
     return {
-      show: false
+      show: false,
+      selected: []
     };
   }
 };
