@@ -23,7 +23,7 @@ export const getStreamStatus = followedStreams => {
     .map(followedStream => `user_id=${followedStream.to_id}`)
     .join("&");
 
-  return twitchApiClient.get(`/streams?user_id=${query}`);
+  return twitchApiClient.get(`/streams?${query}`);
 };
 
 export const setAccessToken = token => {
