@@ -15,17 +15,20 @@ export default new Vuex.Store({
   state: {
     accessToken: "",
     idToken: "",
-    liveUsers: []
+    liveUsers: [],
+    selectedStreams: []
   },
   getters: {
     getAccessToken: state => state.accessToken,
     getIdToken: state => state.idToken,
-    getLiveUsers: state => state.liveUsers
+    getLiveUsers: state => state.liveUsers,
+    getSelectedStreams: state => state.selectedStreams
   },
   mutations: {
     setAccessToken: (state, payload) => state.accessToken = payload,
     setIdToken: (state, payload) => state.idToken = payload,
-    setLiveUsers: (state, payload) => state.liveUsers = payload
+    setLiveUsers: (state, payload) => state.liveUsers = payload,
+    setSelectedStreams: (state, payload) => state.selectedStreams = payload
   },
   actions: {
   },

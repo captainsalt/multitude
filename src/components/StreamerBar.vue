@@ -56,13 +56,20 @@ export default {
   },
   data() {
     return {
-      show: false,
-      selected: []
+      show: false
     };
   },
   computed: {
     liveStreamers() {
       return this.$store.getters.getLiveUsers;
+    },
+    selected: {
+      get() {
+        return this.$store.getters.getSelectedStreams;
+      },
+      set(val) {
+        this.$store.commit("setSelectedStreams", val);
+      }
     }
   }
 };
