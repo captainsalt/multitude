@@ -8,17 +8,28 @@
     <v-btn href="/login">
       Login
     </v-btn>
+
+    <!-- stream area -->
+    <div id="area-container" v-resize="containerHeight">
+      <StreamPlayer
+        v-for="streamerUsername in selectedStreams"
+        :key="streamerUsername"
+        :streamer-username="streamerUsername"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import * as twitch from "@/services/twitch-service.js";
 import StreamerBar from "@/components/StreamerBar.vue";
+import StreamPlayer from "@/components/StreamPlayer.vue";
 
 export default {
   name: "Home",
   components: {
-    StreamerBar
+    StreamerBar,
+    StreamPlayer
   },
   data() {
     return {
@@ -26,6 +37,11 @@ export default {
       username: "",
       pictureUrl: ""
     };
+  },
+  computed: {
+    selectedStreams() {
+      return this.$store.getters.getSelectedStreams;
+    }
   },
   async mounted() {
     if (twitch.isAuthenticated()) {
@@ -47,9 +63,30 @@ export default {
       const streamStatus = await twitch.getStreamStatus(followedStreams.data.data);
       this.$store.commit("setLiveUsers", streamStatus.data.data);
     },
+    containerHeight() {
+      const areaContainer = this.$el.querySelector("#area-container");
+
+      areaContainer.style.height = `calc(100vh - ${areaContainer.offsetTop}px - 12px)`;
+      areaContainer.style.width = "calc(100vw - 24px)";
+    },
     displayStreamerBar() {
       this.$refs.streamerBar.$data.show = !this.$refs.streamerBar.$data.show;
     }
   }
 };
 </script>
+
+<style scoped>
+#area-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid black;
+}
+
+#area-container * {
+  /* flex-grow: 1; */
+  /* flex-shrink: 1; */
+}
+</style>

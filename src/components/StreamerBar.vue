@@ -26,7 +26,7 @@
         <v-list-item
           v-for="streamer in liveStreamers"
           :key="streamer.user_id"
-          :value="streamer.user_id"
+          :value="streamer.user_name"
         >
           <!-- <v-list-item-icon>
             <v-icon>{{ streamer.username }}</v-icon>
