@@ -18,8 +18,8 @@ export default {
   mounted() {
     // eslint-disable-next-line no-undef
     this.player = new Twitch.Player(this.streamerUsername, {
-      width: "auto",
-      height: "auto",
+      width: "100%",
+      height: "100%",
       channel: this.streamerUsername
     });
   }

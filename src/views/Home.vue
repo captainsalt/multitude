@@ -11,11 +11,17 @@
 
     <!-- stream area -->
     <div id="area-container" v-resize="containerHeight">
-      <StreamPlayer
-        v-for="streamerUsername in selectedStreams"
-        :key="streamerUsername"
-        :streamer-username="streamerUsername"
-      />
+      <div id="stream-area">
+        <StreamPlayer
+          v-for="streamerUsername in selectedStreams"
+          :key="streamerUsername"
+          :streamer-username="streamerUsername"
+        />
+      </div>
+
+      <div id="chat-area">
+        hello
+      </div>
     </div>
   </div>
 </template>
@@ -78,15 +84,24 @@ export default {
 
 <style scoped>
 #area-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  border: 1px solid black;
+  display: grid;
+  grid-template: "stream chat" auto / 3fr 1fr;
+  grid-gap: 5px
 }
 
-#area-container * {
-  /* flex-grow: 1; */
-  /* flex-shrink: 1; */
+#stream-area {
+  height: 100%;
+  display: grid;
+  grid-template: auto / repeat(3, 1fr);
+  justify-items: stretch;
+  align-items: stretch;
+  grid-gap: 1px;
+  grid-area: stream;
+}
+
+#chat-area {
+  height: 100%;
+  grid-area: chat;
+  border: 1px solid black;
 }
 </style>
