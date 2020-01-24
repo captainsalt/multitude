@@ -24,7 +24,7 @@
         active-class="pink--text"
       >
         <v-list-item
-          v-for="streamer in streamers"
+          v-for="streamer in liveStreamers"
           :key="streamer.user_id"
           :value="streamer.user_id"
         >
@@ -52,10 +52,6 @@ export default {
     profilePicture: {
       "type": String,
       "default": require("@/assets/logo.png")
-    },
-    streamers: {
-      "type": Array,
-      "default": () => []
     }
   },
   data() {
@@ -63,6 +59,11 @@ export default {
       show: false,
       selected: []
     };
+  },
+  computed: {
+    liveStreamers() {
+      return this.$store.getters.getLiveUsers;
+    }
   }
 };
 </script>

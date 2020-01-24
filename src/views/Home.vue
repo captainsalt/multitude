@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StreamerBar ref="streamerBar" :username="username" :profile-picture="pictureUrl" :streamers="streamerData" />
+    <StreamerBar ref="streamerBar" :username="username" :profile-picture="pictureUrl" />
     <v-btn @click="displayStreamerBar">
       Show
     </v-btn>
@@ -24,8 +24,7 @@ export default {
     return {
       id: null,
       username: "",
-      pictureUrl: "",
-      streamerData: []
+      pictureUrl: ""
     };
   },
   async mounted() {
@@ -46,7 +45,7 @@ export default {
     async getStreams() {
       const followedStreams = await twitch.getFollowedStreams(this.id);
       const streamStatus = await twitch.getStreamStatus(followedStreams.data.data);
-      this.streamerData = streamStatus.data.data;
+      this.$store.commit("setLiveUsers", streamStatus.data.data);
     },
     displayStreamerBar() {
       this.$refs.streamerBar.$data.show = !this.$refs.streamerBar.$data.show;
