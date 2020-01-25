@@ -20,7 +20,7 @@
       </div>
 
       <div id="chat-area">
-        hello
+        <ChatControl/>
       </div>
     </div>
   </div>
@@ -30,13 +30,15 @@
 import * as twitch from "@/services/twitch-service.js";
 import StreamerBar from "@/components/StreamerBar.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
+import ChatControl from "@/components/ChatControl.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
   components: {
     StreamerBar,
-    StreamPlayer
+    StreamPlayer,
+    ChatControl
   },
   data() {
     return {
@@ -100,6 +102,5 @@ export default {
 #chat-area {
   height: 100%;
   grid-area: chat;
-  border: 1px solid black;
 }
 </style>
