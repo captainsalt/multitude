@@ -1,5 +1,5 @@
 <template>
-  <div :id="streamerUsername" />
+  <div :id="streamerUsername"/>
 </template>
 
 <script>

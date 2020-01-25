@@ -7,7 +7,7 @@
     >
       <v-list-item>
         <v-list-item-avatar>
-          <v-img :src="profilePicture" />
+          <v-img :src="profilePicture"/>
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -15,7 +15,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-divider />
+      <v-divider/>
 
       <v-list-item-group
         v-model="selected"
