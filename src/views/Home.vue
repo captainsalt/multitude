@@ -13,7 +13,7 @@
     <div id="area-container" v-resize="containerHeight">
       <div id="stream-area">
         <StreamPlayer
-          v-for="streamerUsername in selectedStreams"
+          v-for="streamerUsername in getSelectedStreams"
           :key="streamerUsername"
           :streamer-username="streamerUsername"
         />
@@ -30,6 +30,7 @@
 import * as twitch from "@/services/twitch-service.js";
 import StreamerBar from "@/components/StreamerBar.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -45,9 +46,9 @@ export default {
     };
   },
   computed: {
-    selectedStreams() {
-      return this.$store.getters.getSelectedStreams;
-    }
+    ...mapGetters([
+      "getSelectedStreams"
+    ])
   },
   async mounted() {
     if (twitch.isAuthenticated()) {
@@ -85,18 +86,15 @@ export default {
 <style scoped>
 #area-container {
   display: grid;
-  grid-template: "stream chat" auto / 3fr 1fr;
-  grid-gap: 5px
+  grid-template: "stream chat" auto / 80% 20%;
+  grid-gap: 5px;
 }
 
 #stream-area {
-  height: 100%;
-  display: grid;
-  grid-template: auto / repeat(3, 1fr);
-  justify-items: stretch;
-  align-items: stretch;
-  grid-gap: 1px;
-  grid-area: stream;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 }
 
 #chat-area {

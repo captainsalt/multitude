@@ -1,5 +1,5 @@
 <template>
-  <div :id="streamerUsername"/>
+  <div :id="streamerUsername" class="stream"/>
 </template>
 
 <script>
@@ -15,6 +15,8 @@ export default {
       player: null
     };
   },
+  computed: {
+  },
   mounted() {
     // eslint-disable-next-line no-undef
     this.player = new Twitch.Player(this.streamerUsername, {
@@ -27,4 +29,11 @@ export default {
 </script>
 
 <style>
+.stream {
+  width: 450px;
+  height: 300px;
+  max-width: 450px;
+  max-height: 350px;
+  margin: 1px;
+}
 </style>
