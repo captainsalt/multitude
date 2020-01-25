@@ -15,5 +15,8 @@ module.exports = {
   },
   "parserOptions": {
     parser: "babel-eslint"
-  }
+  },
+  "plugins": [
+    "only-warn"
+  ]
 };
