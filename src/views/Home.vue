@@ -1,6 +1,5 @@
 <template>
   <div>
-    <StreamSelect ref="streamSelect" :username="username" :profile-picture="pictureUrl"/>
     <v-btn @click="displayStreamSelect">
       Show
     </v-btn>
@@ -23,6 +22,12 @@
         <ChatPicker/>
       </div>
     </div>
+
+    <StreamSelect
+      ref="streamSelect"
+      :username="username"
+      :profile-picture="pictureUrl"
+    />
   </div>
 </template>
 
