@@ -22,6 +22,7 @@
         dense
         multiple
         active-class="pink--text"
+        max="4"
       >
         <v-list-item
           v-for="streamer in liveStreamers"
