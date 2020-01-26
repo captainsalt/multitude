@@ -101,6 +101,5 @@ export default {
 
 #chat-area {
   height: 100%;
-  grid-area: chat;
 }
 </style>
