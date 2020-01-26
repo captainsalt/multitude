@@ -1,7 +1,7 @@
 <template>
   <div>
-    <StreamerBar ref="streamerBar" :username="username" :profile-picture="pictureUrl"/>
-    <v-btn @click="displayStreamerBar">
+    <StreamSelect ref="streamSelect" :username="username" :profile-picture="pictureUrl"/>
+    <v-btn @click="displayStreamSelect">
       Show
     </v-btn>
 
@@ -28,7 +28,7 @@
 
 <script>
 import * as twitch from "@/services/twitch-service.js";
-import StreamerBar from "@/components/StreamerBar.vue";
+import StreamSelect from "@/components/StreamSelect.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
 import ChatControl from "@/components/ChatControl.vue";
 import { mapGetters } from "vuex";
@@ -36,7 +36,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Home",
   components: {
-    StreamerBar,
+    StreamSelect,
     StreamPlayer,
     ChatControl
   },
@@ -78,8 +78,8 @@ export default {
       areaContainer.style.height = `calc(100vh - ${areaContainer.offsetTop}px - 12px)`;
       areaContainer.style.width = "calc(100vw - 24px)";
     },
-    displayStreamerBar() {
-      this.$refs.streamerBar.$data.show = !this.$refs.streamerBar.$data.show;
+    displayStreamSelect() {
+      this.$refs.streamSelect.$data.show = !this.$refs.streamSelect.$data.show;
     }
   }
 };
