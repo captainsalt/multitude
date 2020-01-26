@@ -16,7 +16,15 @@ export const getUserInfo = () =>
     }
   });
 
-export const getFollowedStreams = fromId => twitchApiClient.get(`/users/follows?first=100&from_id=${fromId}`);
+export const getFollowedStreams = (fromId, cursor) => {
+  let requestUrl = `/users/follows?first=100&from_id=${fromId}`;
+
+  if (cursor) {
+    requestUrl = `${requestUrl}&after=${cursor}`;
+  }
+
+  return twitchApiClient.get(requestUrl);
+};
 
 export const getStreamStatus = followedStreams => {
   const query = followedStreams
@@ -25,6 +33,31 @@ export const getStreamStatus = followedStreams => {
 
   return twitchApiClient.get(`/streams?${query}`);
 };
+
+export async function *getLiveStreams() {
+  const userInfo = await getUserInfo();
+  const { sub: id } = userInfo.data;
+  let cursor = null;
+
+  while (true) {
+    const followedStreams = await getFollowedStreams(id, cursor);
+    const {
+      data: {
+        data: followData,
+        pagination
+      }
+    } = followedStreams;
+
+    cursor = pagination.cursor;
+    const liveChannels = (await getStreamStatus(followData)).data.data;
+
+    yield liveChannels;
+
+    if (followData.length < 100) {
+      break;
+    }
+  }
+}
 
 export const setAccessToken = token => {
   twitchApiClient.defaults.headers = {
