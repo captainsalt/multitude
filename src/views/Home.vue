@@ -10,7 +10,7 @@
     </v-btn>
 
     <!-- stream area -->
-    <div id="area-container" v-resize="containerHeight">
+    <div id="area-container" v-resize="setContainerHeight">
       <div id="stream-area">
         <StreamPlayer
           v-for="streamerUsername in getSelectedStreams"
@@ -72,7 +72,7 @@ export default {
       const streamStatus = await twitch.getStreamStatus(followedStreams.data.data);
       this.$store.commit("setLiveUsers", streamStatus.data.data);
     },
-    containerHeight() {
+    setContainerHeight() {
       const areaContainer = this.$el.querySelector("#area-container");
 
       areaContainer.style.height = `calc(100vh - ${areaContainer.offsetTop}px - 12px)`;
