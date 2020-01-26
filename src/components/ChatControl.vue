@@ -1,19 +1,53 @@
 <template>
   <div id="chat-control">
     <div>
-      Buttons
+      <v-chip-group
+        v-model="selectedChat"
+        column
+      >
+        <v-chip
+          v-for="username in getSelectedStreams"
+          :key="username"
+          :value="username"
+        >
+          {{ username }}
+        </v-chip>
+      </v-chip-group>
     </div>
+
     <iframe
+      v-for="username in getSelectedStreams"
+      :key="username"
+      :hidden="!isSelected(username)"
+      :src="getLink(username)"
       frameborder="0"
       scrolling="yes"
-      src="https://www.twitch.tv/embed/hebo/chat"
     />
   </div>
 </template>
 
 <script>
-export default {
+import { mapGetters } from "vuex";
 
+export default {
+  data() {
+    return {
+      selectedChat: ""
+    };
+  },
+  computed: {
+    ...mapGetters([
+      "getSelectedStreams"
+    ])
+  },
+  methods: {
+    getLink(username) {
+      return `https://www.twitch.tv/embed/${username}/chat`;
+    },
+    isSelected(username) {
+      return this.selectedChat === username;
+    }
+  }
 };
 </script>
 
