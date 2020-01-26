@@ -20,7 +20,7 @@
       </div>
 
       <div id="chat-area">
-        <ChatControl/>
+        <ChatPicker/>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
 import * as twitch from "@/services/twitch-service.js";
 import StreamSelect from "@/components/StreamSelect.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
-import ChatControl from "@/components/ChatControl.vue";
+import ChatPicker from "@/components/ChatPicker.vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -38,7 +38,7 @@ export default {
   components: {
     StreamSelect,
     StreamPlayer,
-    ChatControl
+    ChatPicker
   },
   data() {
     return {
