@@ -25,7 +25,7 @@
         max="4"
       >
         <v-list-item
-          v-for="streamer in liveStreamers"
+          v-for="streamer in getLiveUsers"
           :key="streamer.user_id"
           :value="streamer.user_name"
         >
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     username: {
@@ -61,12 +63,13 @@ export default {
     };
   },
   computed: {
-    liveStreamers() {
-      return this.$store.getters.getLiveUsers;
-    },
+    ...mapGetters([
+      "getLiveUsers",
+      "getSelectedStreams"
+    ]),
     selected: {
       get() {
-        return this.$store.getters.getSelectedStreams;
+        return this.getSelectedStreams;
       },
       set(val) {
         this.$store.commit("setSelectedStreams", val);
