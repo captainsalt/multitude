@@ -9,14 +9,7 @@ const twitchApiClient = axios.create({
   }
 });
 
-export const getUserInfo = () =>
-  axios.get("https://id.twitch.tv/oauth2/userinfo", {
-    headers: {
-      Authorization: `Bearer ${store.getters.getAccessToken}`
-    }
-  });
-
-export const getFollowedStreams = (fromId, cursor) => {
+const getFollowedStreams = (fromId, cursor) => {
   let requestUrl = `/users/follows?first=100&from_id=${fromId}`;
 
   if (cursor) {
@@ -26,13 +19,20 @@ export const getFollowedStreams = (fromId, cursor) => {
   return twitchApiClient.get(requestUrl);
 };
 
-export const getStreamStatus = followedStreams => {
+const getStreamStatus = followedStreams => {
   const query = followedStreams
     .map(followedStream => `user_id=${followedStream.to_id}`)
     .join("&");
 
   return twitchApiClient.get(`/streams?${query}`);
 };
+
+export const getUserInfo = () =>
+  axios.get("https://id.twitch.tv/oauth2/userinfo", {
+    headers: {
+      Authorization: `Bearer ${store.getters.getAccessToken}`
+    }
+  });
 
 export async function *getLiveStreams() {
   const userInfo = await getUserInfo();
