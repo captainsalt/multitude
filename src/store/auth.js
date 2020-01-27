@@ -25,7 +25,7 @@ export default {
     setUser({ commit }, userObject) {
       const { sub: id, preferred_username, picture } = userObject;
 
-      commit("setIdToken", id);
+      commit("setUserId", id);
       commit("setUsername", preferred_username);
       commit("setPicureUrl", picture);
     }
