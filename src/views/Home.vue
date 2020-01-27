@@ -90,7 +90,7 @@ export default {
 <style scoped>
 #area-container {
   display: grid;
-  grid-template: "stream chat" auto / 80% 20%;
+  grid-template: "stream chat" auto / 75% 25%;
   grid-gap: 5px;
 }
 
