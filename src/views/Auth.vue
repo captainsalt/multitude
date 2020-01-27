@@ -22,10 +22,10 @@ export default {
 
         switch (key) {
           case "id_token":
-            this.$store.commit("setIdToken", value);
+            this.$store.commit("auth/setIdToken", value);
             break;
           case "access_token":
-            this.$store.commit("setAccessToken", value);
+            this.$store.commit("auth/setAccessToken", value);
             setAccessToken(value);
             break;
           default:
