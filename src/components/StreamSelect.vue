@@ -7,11 +7,11 @@
     >
       <v-list-item>
         <v-list-item-avatar>
-          <v-img :src="profilePicture"/>
+          <v-img :src="getPictureUrl || require('@/assets/logo.png')"/>
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>{{ username }}</v-list-item-title>
+          <v-list-item-title>{{ getUsername }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -47,16 +47,6 @@
 import { mapGetters } from "vuex";
 
 export default {
-  props: {
-    username: {
-      "type": String,
-      "default": ""
-    },
-    profilePicture: {
-      "type": String,
-      "default": require("@/assets/logo.png")
-    }
-  },
   data() {
     return {
       show: false
@@ -66,6 +56,10 @@ export default {
     ...mapGetters([
       "getLiveUsers",
       "getSelectedStreams"
+    ]),
+    ...mapGetters("auth", [
+      "getUsername",
+      "getPictureUrl"
     ]),
     selected: {
       get() {
