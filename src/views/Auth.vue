@@ -3,7 +3,12 @@
     <p class="text-center">
       Authenticating...
     </p>
-    <v-text-field color="success" loading disabled/>
+
+    <v-text-field
+      color="success"
+      loading
+      disabled
+    />
   </div>
 </template>
 
