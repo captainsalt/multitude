@@ -40,13 +40,6 @@ export default {
     StreamPlayer,
     ChatPicker
   },
-  data() {
-    return {
-      id: null,
-      username: "",
-      pictureUrl: ""
-    };
-  },
   computed: {
     ...mapGetters([
       "getSelectedStreams"
