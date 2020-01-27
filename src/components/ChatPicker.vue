@@ -60,6 +60,7 @@ export default {
     "buttons" auto
     "chat" 1fr / 1fr;
 }
+
 iframe {
   height: 100%;
   width: 100%;
