@@ -8,7 +8,6 @@
       Login
     </v-btn>
 
-    <!-- stream area -->
     <div id="area-container" v-resize="setContainerHeight">
       <div id="stream-area">
         <StreamPlayer
