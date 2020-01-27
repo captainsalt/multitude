@@ -35,8 +35,7 @@ export const getUserInfo = () =>
   });
 
 export async function *getLiveStreams() {
-  const userInfo = await getUserInfo();
-  const { sub: id } = userInfo.data;
+  const id = store.state.auth.userId;
   let cursor = null;
 
   while (true) {
