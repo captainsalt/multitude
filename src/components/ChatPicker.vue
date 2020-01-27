@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     getLink(username) {
-      return `https://www.twitch.tv/embed/${username}/chat`;
+      return `https://www.twitch.tv/embed/${username}/chat?darkpopout`;
     },
     isSelected(username) {
       return this.selectedChat === username;
