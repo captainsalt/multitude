@@ -4,7 +4,7 @@
       <v-chip-group
         v-model="selectedChat"
         column
-        active-class="primary--text"
+        active-class="primary"
       >
         <v-chip
           v-for="username in getSelectedStreams"
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     getLink(username) {
-      return `https://www.twitch.tv/embed/${username}/chat`;
+      return `https://www.twitch.tv/embed/${username}/chat?darkpopout`;
     },
     isSelected(username) {
       return this.selectedChat === username;
@@ -67,6 +67,7 @@ export default {
     "buttons" auto
     "chat" 1fr / 1fr;
 }
+
 iframe {
   height: 100%;
   width: 100%;
