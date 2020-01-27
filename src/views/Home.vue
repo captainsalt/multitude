@@ -23,11 +23,7 @@
       </div>
     </div>
 
-    <StreamSelect
-      ref="streamSelect"
-      :username="username"
-      :profile-picture="pictureUrl"
-    />
+    <StreamSelect ref="streamSelect"/>
   </div>
 </template>
 
