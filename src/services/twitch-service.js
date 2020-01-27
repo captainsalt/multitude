@@ -5,7 +5,7 @@ const twitchApiClient = axios.create({
   baseURL: "https://api.twitch.tv/helix",
   headers: {
     "Client-ID": process.env.VUE_APP_CLIENT_ID,
-    "Authorization": `Bearer ${store.getters.getAccessToken}`
+    "Authorization": `Bearer ${store.state.auth.accessToken}`
   }
 });
 
@@ -30,7 +30,7 @@ const getStreamStatus = followedStreams => {
 export const getUserInfo = () =>
   axios.get("https://id.twitch.tv/oauth2/userinfo", {
     headers: {
-      Authorization: `Bearer ${store.getters.getAccessToken}`
+      Authorization: `Bearer ${store.state.auth.accessToken}`
     }
   });
 
@@ -66,7 +66,7 @@ export const setAccessToken = token => {
 };
 
 export const isAuthenticated = () => {
-  if (store.getters.getAccessToken) {
+  if (store.state.auth.accessToken) {
     return true;
   }
 
