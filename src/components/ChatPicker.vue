@@ -41,6 +41,13 @@ export default {
       "getSelectedStreams"
     ])
   },
+  watch: {
+    getSelectedStreams(streamers) {
+      if (streamers.length === 1) {
+        this.selectedChat = streamers[0];
+      }
+    }
+  },
   methods: {
     getLink(username) {
       return `https://www.twitch.tv/embed/${username}/chat`;
