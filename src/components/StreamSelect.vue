@@ -21,7 +21,7 @@
         v-model="selected"
         dense
         multiple
-        active-class="pink--text"
+        active-class="primary"
         max="4"
       >
         <v-list-item

@@ -4,7 +4,7 @@
       <v-chip-group
         v-model="selectedChat"
         column
-        active-class="primary--text"
+        active-class="primary"
       >
         <v-chip
           v-for="username in getSelectedStreams"
