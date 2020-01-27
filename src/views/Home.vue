@@ -36,7 +36,7 @@ import * as twitch from "@/services/twitch-service.js";
 import StreamSelect from "@/components/StreamSelect.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
 import ChatPicker from "@/components/ChatPicker.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Home",
@@ -59,23 +59,17 @@ export default {
   },
   async mounted() {
     if (twitch.isAuthenticated()) {
-      await this.getUserInfo();
-      await this.getStreams();
+      await this.getLiveStreams();
     }
   },
   methods: {
-    async getUserInfo() {
-      const userInfo = await twitch.getUserInfo();
-      const { sub, preferred_username, pictureUrl } = userInfo.data;
-
-      this.id = sub;
-      this.username = preferred_username;
-      this.pictureUrl = pictureUrl;
-    },
-    async getStreams() {
-      const followedStreams = await twitch.getFollowedStreams(this.id);
-      const streamStatus = await twitch.getStreamStatus(followedStreams.data.data);
-      this.$store.commit("setLiveUsers", streamStatus.data.data);
+    ...mapMutations([
+      "addLiveUsers"
+    ]),
+    async getLiveStreams() {
+      for await (const liveUsers of twitch.getLiveStreams()) {
+        this.addLiveUsers(liveUsers);
+      }
     },
     setContainerHeight() {
       const areaContainer = this.$el.querySelector("#area-container");

@@ -28,6 +28,7 @@ export default new Vuex.Store({
     setAccessToken: (state, payload) => state.accessToken = payload,
     setIdToken: (state, payload) => state.idToken = payload,
     setLiveUsers: (state, payload) => state.liveUsers = payload,
+    addLiveUsers: (state, payload) => state.liveUsers = state.liveUsers.concat(payload),
     setSelectedStreams: (state, payload) => state.selectedStreams = payload
   },
   actions: {
