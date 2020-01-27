@@ -7,7 +7,7 @@
     >
       <v-list-item>
         <v-list-item-avatar>
-          <v-img :src="getPictureUrl || require('@/assets/logo.png')"/>
+          <v-img :src="getPictureUrl || require('@/assets/default-profile.png')"/>
         </v-list-item-avatar>
 
         <v-list-item-content>
