@@ -36,7 +36,7 @@ import * as twitch from "@/services/twitch-service.js";
 import StreamSelect from "@/components/StreamSelect.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
 import ChatPicker from "@/components/ChatPicker.vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -59,6 +59,7 @@ export default {
   },
   async mounted() {
     if (twitch.isAuthenticated()) {
+      await this.getUserInfo();
       await this.getLiveStreams();
     }
   },
@@ -66,6 +67,13 @@ export default {
     ...mapMutations([
       "addLiveUsers"
     ]),
+    ...mapActions("auth", [
+      "setUser"
+    ]),
+    async getUserInfo() {
+      const user = (await twitch.getUserInfo()).data;
+      this.setUser(user);
+    },
     async getLiveStreams() {
       for await (const liveUsers of twitch.getLiveStreams()) {
         this.addLiveUsers(liveUsers);
