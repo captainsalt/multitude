@@ -7,11 +7,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: Home
-  },
-  {
     path: "/login",
     name: "login",
     component: () => import("@/views/Login.vue"),
@@ -36,6 +31,11 @@ const routes = [
         next();
       }
     }
+  },
+  {
+    path: "*",
+    name: "home",
+    component: Home
   }
 ];
 
