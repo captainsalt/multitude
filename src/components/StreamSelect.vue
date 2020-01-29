@@ -24,7 +24,10 @@
         active-class="primary"
         max="4"
       >
-        <v-subheader class="flex justify-center title">
+        <v-subheader
+          v-if="getUrlUsers.length"
+          class="flex justify-center title"
+        >
           Url Streams
         </v-subheader>
 
@@ -36,7 +39,10 @@
           {{ username }}
         </v-list-item>
 
-        <v-subheader class="flex justify-center title">
+        <v-subheader
+          v-if="getLiveUsers.length"
+          class="flex justify-center title"
+        >
           Live Channels
         </v-subheader>
 
