@@ -46,7 +46,7 @@ export default {
     ])
   },
   async mounted() {
-    this.parseLink();
+    this.getUrlUsers();
     if (twitch.isAuthenticated()) {
       await this.getUserInfo();
       await this.getLiveStreams();
@@ -61,7 +61,7 @@ export default {
     ...mapActions("auth", [
       "setUser"
     ]),
-    parseLink() {
+    getUrlUsers() {
       if (window.location.pathname === "/") return;
 
       const filter = new Set(window.location.pathname.split("/"));
