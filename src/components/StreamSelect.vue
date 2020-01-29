@@ -24,15 +24,27 @@
         active-class="primary"
         max="4"
       >
+        <v-subheader class="flex justify-center title">
+          Url Streams
+        </v-subheader>
+
+        <v-list-item
+          v-for="username in getUrlUsers"
+          :key="username"
+          :value="username"
+        >
+          {{ username }}
+        </v-list-item>
+
+        <v-subheader class="flex justify-center title">
+          Live Channels
+        </v-subheader>
+
         <v-list-item
           v-for="streamer in getLiveUsers"
           :key="streamer.user_id"
           :value="streamer.user_name"
         >
-          <!-- <v-list-item-icon>
-            <v-icon>{{ streamer.username }}</v-icon>
-          </v-list-item-icon> -->
-
           <v-list-item-content>
             <v-list-item-title>{{ streamer.user_name }}</v-list-item-title>
             {{ streamer.title }}
@@ -55,6 +67,7 @@ export default {
   computed: {
     ...mapGetters([
       "getLiveUsers",
+      "getUrlUsers",
       "getSelectedStreams"
     ]),
     ...mapGetters("auth", [
