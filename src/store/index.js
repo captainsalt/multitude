@@ -15,15 +15,19 @@ const persistStatePlugin = createPersistedState({
 export default new Vuex.Store({
   state: {
     liveUsers: [],
+    urlUsers: [],
     selectedStreams: []
   },
   getters: {
     getLiveUsers: state => state.liveUsers,
+    getUrlUsers: state => state.urlUsers,
     getSelectedStreams: state => state.selectedStreams
   },
   mutations: {
     setLiveUsers: (state, payload) => state.liveUsers = payload,
     addLiveUsers: (state, payload) => state.liveUsers = state.liveUsers.concat(payload),
+    setUrlUsers: (state, payload) => state.urlUsers = payload,
+    addUrlUser: (state, payload) => state.urlUsers = state.urlUsers.concat(payload),
     setSelectedStreams: (state, payload) => state.selectedStreams = payload
   },
   modules: {
