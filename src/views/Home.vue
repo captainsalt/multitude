@@ -46,6 +46,7 @@ export default {
     ])
   },
   async mounted() {
+    this.parseLink();
     if (twitch.isAuthenticated()) {
       await this.getUserInfo();
       await this.getLiveStreams();
@@ -53,11 +54,22 @@ export default {
   },
   methods: {
     ...mapMutations([
-      "addLiveUsers"
+      "addLiveUsers",
+      "setUrlUsers",
+      "setSelectedStreams"
     ]),
     ...mapActions("auth", [
       "setUser"
     ]),
+    parseLink() {
+      if (window.location.pathname === "/") return;
+
+      const filter = new Set(window.location.pathname.split("/"));
+      filter.delete("");
+
+      this.setUrlUsers([...filter]);
+      this.setSelectedStreams([...filter].splice(0, 4));
+    },
     async getUserInfo() {
       const user = (await twitch.getUserInfo()).data;
       this.setUser(user);
