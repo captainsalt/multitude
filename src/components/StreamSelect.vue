@@ -52,8 +52,13 @@
           :value="streamer.user_name"
         >
           <v-list-item-content>
-            <v-list-item-title>{{ streamer.user_name }}</v-list-item-title>
-            {{ streamer.title }}
+            <v-list-item-title>
+              {{ streamer.user_name }}
+            </v-list-item-title>
+
+            <v-list-item-subtitle class="truncate">
+              {{ streamer.title }}
+            </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
