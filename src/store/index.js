@@ -19,9 +19,9 @@ export default new Vuex.Store({
     selectedStreams: []
   },
   getters: {
-    getLiveUsers: state => state.liveUsers,
-    getUrlUsers: state => state.urlUsers,
-    getSelectedStreams: state => state.selectedStreams
+    liveUsers: state => state.liveUsers,
+    urlUsers: state => state.urlUsers,
+    selectedStreams: state => state.selectedStreams
   },
   mutations: {
     setLiveUsers: (state, payload) => state.liveUsers = payload,

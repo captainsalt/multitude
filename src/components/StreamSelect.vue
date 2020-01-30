@@ -7,11 +7,11 @@
     >
       <v-list-item>
         <v-list-item-avatar>
-          <v-img :src="getPictureUrl || require('@/assets/default-profile.png')"/>
+          <v-img :src="pictureUrl || require('@/assets/default-profile.png')"/>
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>{{ getUsername }}</v-list-item-title>
+          <v-list-item-title>{{ username }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -25,14 +25,14 @@
         max="4"
       >
         <v-subheader
-          v-if="getUrlUsers.length"
+          v-if="urlUsers.length"
           class="flex justify-center title"
         >
           Url Streams
         </v-subheader>
 
         <v-list-item
-          v-for="username in getUrlUsers"
+          v-for="username in urlUsers"
           :key="username"
           :value="username"
         >
@@ -40,14 +40,14 @@
         </v-list-item>
 
         <v-subheader
-          v-if="getLiveUsers.length"
+          v-if="liveUsers.length"
           class="flex justify-center title"
         >
           Live Channels
         </v-subheader>
 
         <v-list-item
-          v-for="streamer in getLiveUsers"
+          v-for="streamer in liveUsers"
           :key="streamer.user_id"
           :value="streamer.user_name"
         >
@@ -77,17 +77,17 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getLiveUsers",
-      "getUrlUsers",
-      "getSelectedStreams"
+      "liveUsers",
+      "urlUsers",
+      "selectedStreams"
     ]),
     ...mapGetters("auth", [
-      "getUsername",
-      "getPictureUrl"
+      "username",
+      "pictureUrl"
     ]),
     selected: {
       get() {
-        return this.getSelectedStreams;
+        return this.selectedStreams;
       },
       set(val) {
         this.$store.commit("setSelectedStreams", val);

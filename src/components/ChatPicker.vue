@@ -7,7 +7,7 @@
         active-class="primary"
       >
         <v-chip
-          v-for="username in getSelectedStreams"
+          v-for="username in selectedStreams"
           :key="username"
           :value="username"
         >
@@ -17,7 +17,7 @@
     </div>
 
     <iframe
-      v-for="username in getSelectedStreams"
+      v-for="username in selectedStreams"
       :key="username"
       :hidden="!isSelected(username)"
       :src="getLink(username)"
@@ -38,18 +38,18 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getSelectedStreams"
+      "selectedStreams"
     ])
   },
   watch: {
     // Select first chat if users removes the current selected chat
     selectedChat(val) {
       if (!val) {
-        this.selectedChat = this.getSelectedStreams[0];
+        this.selectedChat = this.selectedStreams[0];
       }
     },
     // Auto select the chat for the first stream added
-    getSelectedStreams(streamers) {
+    selectedStreams(streamers) {
       if (!this.selectedChat) {
         this.selectedChat = streamers[0];
       }

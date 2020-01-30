@@ -8,11 +8,11 @@ export default {
     pictureUrl: ""
   },
   getters: {
-    getAccessToken: state => state.accessToken,
-    getIdToken: state => state.idToken,
-    getUsername: state => state.username,
-    getUserId: state => state.userId,
-    getPictureUrl: state => state.getPictureUrl
+    accessToken: state => state.accessToken,
+    idToken: state => state.idToken,
+    username: state => state.username,
+    userId: state => state.userId,
+    pictureUrl: state => state.getPictureUrl
   },
   mutations: {
     setAccessToken: (state, payload) => state.accessToken = payload,

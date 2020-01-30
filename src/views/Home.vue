@@ -11,7 +11,7 @@
     <div id="area-container" v-resize="setContainerHeight">
       <div id="stream-area">
         <StreamPlayer
-          v-for="streamerUsername in getSelectedStreams"
+          v-for="streamerUsername in selectedStreams"
           :key="streamerUsername"
           :streamer-username="streamerUsername"
         />
@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getSelectedStreams"
+      "selectedStreams"
     ])
   },
   async mounted() {
