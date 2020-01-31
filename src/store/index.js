@@ -14,21 +14,21 @@ const persistStatePlugin = createPersistedState({
 
 export default new Vuex.Store({
   state: {
-    liveUsers: [],
-    urlUsers: [],
-    selectedStreams: []
+    liveChannels: [],
+    urlChannels: [],
+    selectedChannels: []
   },
   getters: {
-    liveUsers: state => state.liveUsers,
-    urlUsers: state => state.urlUsers,
-    selectedStreams: state => state.selectedStreams
+    liveChannels: state => state.liveChannels,
+    urlChannels: state => state.urlChannels,
+    selectedChannels: state => state.selectedChannels
   },
   mutations: {
-    setLiveUsers: (state, payload) => state.liveUsers = payload,
-    addLiveUsers: (state, payload) => state.liveUsers = state.liveUsers.concat(payload),
-    setUrlUsers: (state, payload) => state.urlUsers = payload,
-    addUrlUser: (state, payload) => state.urlUsers = state.urlUsers.concat(payload),
-    setSelectedStreams: (state, payload) => state.selectedStreams = payload
+    setLiveChannels: (state, payload) => state.liveChannels = payload,
+    addLiveChannels: (state, payload) => state.liveChannels = state.liveChannels.concat(payload),
+    setUrlChannels: (state, payload) => state.urlChannels = payload,
+    addUrlChannel: (state, payload) => state.urlChannels = state.urlChannels.concat(payload),
+    setSelectedChannels: (state, payload) => state.selectedChannels = payload
   },
   modules: {
     auth

@@ -34,7 +34,7 @@ export const getUserInfo = () =>
     }
   });
 
-export async function *getLiveStreams() {
+export async function *getLiveChannels() {
   const id = store.state.auth.userId;
   let cursor = null;
 

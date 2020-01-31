@@ -25,14 +25,14 @@
         max="4"
       >
         <v-subheader
-          v-if="urlUsers.length"
+          v-if="urlChannels.length"
           class="flex justify-center title"
         >
           Url Streams
         </v-subheader>
 
         <v-list-item
-          v-for="username in urlUsers"
+          v-for="username in urlChannels"
           :key="username"
           :value="username"
         >
@@ -40,14 +40,14 @@
         </v-list-item>
 
         <v-subheader
-          v-if="liveUsers.length"
+          v-if="liveChannels.length"
           class="flex justify-center title"
         >
           Live Channels
         </v-subheader>
 
         <v-list-item
-          v-for="streamer in liveUsers"
+          v-for="streamer in liveChannels"
           :key="streamer.user_id"
           :value="streamer.user_name"
         >
@@ -77,9 +77,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "liveUsers",
-      "urlUsers",
-      "selectedStreams"
+      "liveChannels",
+      "urlChannels",
+      "selectedChannels"
     ]),
     ...mapGetters("auth", [
       "username",
@@ -87,10 +87,10 @@ export default {
     ]),
     selected: {
       get() {
-        return this.selectedStreams;
+        return this.selectedChannels;
       },
       set(val) {
-        this.$store.commit("setSelectedStreams", val);
+        this.$store.commit("setSelectedChannels", val);
       }
     }
   }

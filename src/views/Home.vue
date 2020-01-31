@@ -11,7 +11,7 @@
     <div id="area-container" v-resize="setContainerHeight">
       <div id="stream-area">
         <StreamPlayer
-          v-for="streamerUsername in selectedStreams"
+          v-for="streamerUsername in selectedChannels"
           :key="streamerUsername"
           :streamer-username="streamerUsername"
         />
@@ -42,41 +42,41 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "selectedStreams"
+      "selectedChannels"
     ])
   },
   async mounted() {
-    this.getUrlUsers();
+    this.getUrlChannels();
     if (twitch.isAuthenticated()) {
       await this.getUserInfo();
-      await this.getLiveStreams();
+      await this.getLiveChannels();
     }
   },
   methods: {
     ...mapMutations([
-      "addLiveUsers",
-      "setUrlUsers",
-      "setSelectedStreams"
+      "addLiveChannels",
+      "setUrlChannels",
+      "setSelectedChannels"
     ]),
     ...mapActions("auth", [
       "setUser"
     ]),
-    getUrlUsers() {
+    getUrlChannels() {
       if (window.location.pathname === "/") return;
 
       const filter = new Set(window.location.pathname.split("/"));
       filter.delete("");
 
-      this.setUrlUsers([...filter]);
-      this.setSelectedStreams([...filter].splice(0, 4));
+      this.setUrlChannels([...filter]);
+      this.setSelectedChannels([...filter].splice(0, 4));
     },
     async getUserInfo() {
       const user = (await twitch.getUserInfo()).data;
       this.setUser(user);
     },
-    async getLiveStreams() {
-      for await (const liveUsers of twitch.getLiveStreams()) {
-        this.addLiveUsers(liveUsers);
+    async getLiveChannels() {
+      for await (const liveChannels of twitch.getLiveChannels()) {
+        this.addLiveChannels(liveChannels);
       }
     },
     setContainerHeight() {
