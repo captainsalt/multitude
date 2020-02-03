@@ -28,6 +28,13 @@ export default {
       commit("setUserId", id);
       commit("setUsername", preferred_username);
       commit("setPicureUrl", picture);
+    },
+    clearAuth({ commit }) {
+      commit("setUserId", "");
+      commit("setUsername", "");
+      commit("setPicureUrl", "");
+      commit("accessToken", "");
+      commit("idToken", "");
     }
   }
 };
