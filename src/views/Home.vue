@@ -50,11 +50,14 @@ export default {
     if (twitch.isAuthenticated()) {
       await this.getUserInfo();
       await this.getLiveChannels();
+      setInterval(() => {
+        this.getLiveChannels();
+      }, 60000);
     }
   },
   methods: {
     ...mapMutations([
-      "addLiveChannels",
+      "setLiveChannels",
       "setUrlChannels",
       "setSelectedChannels"
     ]),
@@ -75,9 +78,8 @@ export default {
       this.setUser(user);
     },
     async getLiveChannels() {
-      for await (const liveChannels of twitch.getLiveChannels()) {
-        this.addLiveChannels(liveChannels);
-      }
+      const channels = await twitch.getLiveChannels();
+      this.setLiveChannels(channels);
     },
     setContainerHeight() {
       const areaContainer = this.$el.querySelector("#area-container");
