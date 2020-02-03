@@ -67,8 +67,14 @@ export const setAccessToken = token => {
   };
 };
 
-export const isAuthenticated = () => {
-  if (store.state.auth.accessToken) {
+export const isAuthenticated = async () => {
+  const result = await axios.get("https://id.twitch.tv/oauth2/validate", {
+    headers: {
+      Authorization: `OAuth ${store.state.auth.accessToken}`
+    }
+  });
+
+  if (result.status === 200) {
     return true;
   }
 
