@@ -1,11 +1,11 @@
 export default {
   namespaced: true,
   state: {
-    accessToken: "",
-    idToken: "",
-    userId: "",
-    username: "",
-    pictureUrl: ""
+    accessToken: null,
+    idToken: null,
+    userId: null,
+    username: null,
+    pictureUrl: null
   },
   getters: {
     accessToken: state => state.accessToken,
@@ -30,11 +30,11 @@ export default {
       commit("setPicureUrl", picture);
     },
     clearAuth({ commit }) {
-      commit("setUserId", "");
-      commit("setUsername", "");
-      commit("setPicureUrl", "");
-      commit("accessToken", "");
-      commit("idToken", "");
+      commit("setUserId", null);
+      commit("setUsername", null);
+      commit("setPicureUrl", null);
+      commit("accessToken", null);
+      commit("idToken", null);
     }
   }
 };
