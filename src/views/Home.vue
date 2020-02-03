@@ -99,6 +99,7 @@ export default {
       this.refreshInterval = null;
       this.$store.dispatch("clearAuth");
       await twitch.revokeToken();
+      location.reload();
     },
     displayStreamSelect() {
       this.$refs.streamSelect.$data.show = !this.$refs.streamSelect.$data.show;
