@@ -31,9 +31,11 @@ export default {
 <style>
 .stream {
   width: 450px;
-  height: 300px;
-  max-width: 450px;
-  max-height: 350px;
+  height: 253.5px;
   margin: 1px;
+}
+
+.stream iframe {
+  border: 1px solid #9147ff;
 }
 </style>
