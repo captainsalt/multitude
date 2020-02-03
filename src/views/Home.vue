@@ -47,7 +47,7 @@ export default {
   },
   async mounted() {
     this.getUrlChannels();
-    if (twitch.isAuthenticated()) {
+    if (await twitch.isAuthenticated()) {
       await this.getUserInfo();
       await this.getLiveChannels();
       setInterval(() => {
