@@ -5,32 +5,27 @@ import { isAuthenticated } from "@/services/twitch-service.js";
 
 Vue.use(VueRouter);
 
+async function redirectIfAuth(to, from, next) {
+  if (await isAuthenticated()) {
+    next("/");
+  }
+  else {
+    next();
+  }
+}
+
 const routes = [
   {
     path: "/login",
     name: "login",
     component: () => import("@/views/Login.vue"),
-    beforeEnter: (to, from, next) => {
-      if (isAuthenticated()) {
-        next("/");
-      }
-      else {
-        next();
-      }
-    }
+    beforeEnter: redirectIfAuth
   },
   {
     path: "/auth",
     name: "auth",
     component: () => import("@/views/Auth.vue"),
-    beforeEnter: (to, from, next) => {
-      if (isAuthenticated()) {
-        next("/");
-      }
-      else {
-        next();
-      }
-    }
+    beforeEnter: redirectIfAuth
   },
   {
     path: "*",
