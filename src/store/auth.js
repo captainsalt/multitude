@@ -30,11 +30,11 @@ export default {
       commit("setPicureUrl", picture);
     },
     clearAuth({ commit }) {
+      commit("setAccessToken", null);
+      commit("setIdToken", null);
       commit("setUserId", null);
       commit("setUsername", null);
       commit("setPicureUrl", null);
-      commit("accessToken", null);
-      commit("idToken", null);
     }
   }
 };

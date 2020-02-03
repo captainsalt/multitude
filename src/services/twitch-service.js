@@ -78,7 +78,7 @@ export const isAuthenticated = async () => {
     return true;
   }
   catch (error) {
-    store.dispatch("clearAuth");
+    store.dispatch("auth/clearAuth");
     return false;
   }
 };
