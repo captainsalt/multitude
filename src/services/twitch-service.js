@@ -78,5 +78,6 @@ export const isAuthenticated = async () => {
     return true;
   }
 
+  store.dispatch("clearAuth");
   return false;
 };
