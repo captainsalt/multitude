@@ -34,9 +34,10 @@ export const getUserInfo = () =>
     }
   });
 
-export async function *getLiveChannels() {
+export async function getLiveChannels() {
   const id = store.state.auth.userId;
   let cursor = null;
+  let channels = [];
 
   while (true) {
     const followedStreams = await getFollowedStreams(id, cursor);
@@ -50,12 +51,14 @@ export async function *getLiveChannels() {
     cursor = pagination.cursor;
     const liveChannels = (await getStreamStatus(followData)).data.data;
 
-    yield liveChannels;
+    channels = channels.concat(liveChannels);
 
     if (followData.length < 100) {
       break;
     }
   }
+
+  return channels;
 }
 
 export const setAccessToken = token => {
