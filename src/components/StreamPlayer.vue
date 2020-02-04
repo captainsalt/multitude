@@ -30,8 +30,6 @@ export default {
 
 <style>
 .stream {
-  width: 450px;
-  height: 253.5px;
   margin: 1px;
 }
 
