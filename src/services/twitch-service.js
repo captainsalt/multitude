@@ -67,10 +67,21 @@ export const setAccessToken = token => {
   };
 };
 
-export const isAuthenticated = () => {
-  if (store.state.auth.accessToken) {
+export const revokeToken = async () =>
+  axios.post(`https://id.twitch.tv/oauth2/revoke?client_id=${process.env.VUE_APP_CLIENT_ID}&token=${store.state.auth.accessToken}`);
+
+export const isAuthenticated = async () => {
+  try {
+    await axios.get("https://id.twitch.tv/oauth2/validate", {
+      headers: {
+        Authorization: `OAuth ${store.state.auth.accessToken}`
+      }
+    });
+
     return true;
   }
-
-  return false;
+  catch (error) {
+    store.dispatch("auth/clearAuth");
+    return false;
+  }
 };

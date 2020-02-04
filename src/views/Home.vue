@@ -3,9 +3,11 @@
     <v-btn @click="displayStreamSelect">
       Show
     </v-btn>
-
     <v-btn href="/login">
       Login
+    </v-btn>
+    <v-btn @click="logout">
+      Logout
     </v-btn>
 
     <div id="area-container" v-resize="setContainerHeight">
@@ -40,6 +42,11 @@ export default {
     StreamPlayer,
     ChatPicker
   },
+  data() {
+    return {
+      refreshInterval: null
+    };
+  },
   computed: {
     ...mapGetters([
       "selectedChannels"
@@ -47,10 +54,10 @@ export default {
   },
   async mounted() {
     this.getUrlChannels();
-    if (twitch.isAuthenticated()) {
+    if (await twitch.isAuthenticated()) {
       await this.getUserInfo();
       await this.getLiveChannels();
-      setInterval(() => {
+      this.refreshInterval = setInterval(() => {
         this.getLiveChannels();
       }, 60000);
     }
@@ -86,6 +93,13 @@ export default {
 
       areaContainer.style.height = `calc(100vh - ${areaContainer.offsetTop}px - 12px)`;
       areaContainer.style.width = "calc(100vw - 24px)";
+    },
+    async logout() {
+      clearInterval(this.refreshInterval);
+      this.refreshInterval = null;
+      this.$store.dispatch("clearAuth");
+      await twitch.revokeToken();
+      location.reload();
     },
     displayStreamSelect() {
       this.$refs.streamSelect.$data.show = !this.$refs.streamSelect.$data.show;
