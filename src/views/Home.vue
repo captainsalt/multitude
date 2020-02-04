@@ -11,7 +11,7 @@
     </v-btn>
 
     <div id="area-container" v-resize="setContainerHeight">
-      <div id="stream-area">
+      <div id="stream-area" v-resize="fillStreamArea">
         <StreamPlayer
           v-for="streamerUsername in selectedChannels"
           :key="streamerUsername"
@@ -51,6 +51,13 @@ export default {
     ...mapGetters([
       "selectedChannels"
     ])
+  },
+  watch: {
+    selectedChannels() {
+      this.$nextTick(() => {
+        this.fillStreamArea();
+      });
+    }
   },
   async mounted() {
     this.getUrlChannels();
@@ -100,6 +107,29 @@ export default {
       this.$store.dispatch("clearAuth");
       await twitch.revokeToken();
       location.reload();
+    },
+    fillStreamArea() {
+      const streamPlayers = this.$el.querySelectorAll("#stream-area .stream");
+      const maxWidth = this.$el.querySelector("#stream-area").offsetWidth;
+      const ratio = 16 / 9;
+      let width = "";
+      let height = "";
+
+      if (this.selectedChannels.length > 1) {
+        const elementWidth = maxWidth * 0.45;
+
+        width = `${elementWidth}px`;
+        height = `${elementWidth / ratio}px`;
+      }
+      else {
+        width = `${maxWidth}px`;
+        height = `${maxWidth / ratio}px`;
+      }
+
+      for (const player of streamPlayers) {
+        player.style.width = width;
+        player.style.height = height;
+      }
     },
     displayStreamSelect() {
       this.$refs.streamSelect.$data.show = !this.$refs.streamSelect.$data.show;
