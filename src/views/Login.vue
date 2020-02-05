@@ -10,7 +10,9 @@
 export default {
   methods: {
     async oauth() {
-      window.location.href = process.env.VUE_APP_AUTH_URL;
+      const redirectUri = `${window.location.origin}/auth`;
+      const redirectUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.VUE_APP_CLIENT_ID}&redirect_uri=${redirectUri}&response_type=token+id_token&scope=openid`;
+      window.location.href = redirectUrl;
     }
   }
 };
