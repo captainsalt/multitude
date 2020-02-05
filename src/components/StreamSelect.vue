@@ -5,7 +5,7 @@
       absolute
       temporary
     >
-      <v-list-item>
+      <v-list-item v-if="username">
         <v-list-item-avatar>
           <v-img :src="pictureUrl || require('@/assets/default-profile.png')"/>
         </v-list-item-avatar>
