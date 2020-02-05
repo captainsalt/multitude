@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!-- <v-btn @click="displayStreamSelect">
-      Show
-    </v-btn>
-    <v-btn href="/login">
-      Login
-    </v-btn>
-    <v-btn @click="logout">
-      Logout
-    </v-btn> -->
-
     <v-btn
       class="primary"
       icon
@@ -50,11 +40,6 @@ export default {
     StreamPlayer,
     ChatPicker
   },
-  data() {
-    return {
-      refreshInterval: null
-    };
-  },
   computed: {
     ...mapGetters([
       "selectedChannels"
@@ -72,7 +57,7 @@ export default {
     if (await twitch.isAuthenticated()) {
       await this.getUserInfo();
       await this.getLiveChannels();
-      this.refreshInterval = setInterval(() => {
+      setInterval(() => {
         this.getLiveChannels();
       }, 60000);
     }
@@ -109,13 +94,7 @@ export default {
       areaContainer.style.height = `calc(100vh - ${areaContainer.offsetTop}px - 12px)`;
       areaContainer.style.width = "calc(100vw - 24px)";
     },
-    async logout() {
-      clearInterval(this.refreshInterval);
-      this.refreshInterval = null;
-      this.$store.dispatch("clearAuth");
-      await twitch.revokeToken();
-      location.reload();
-    },
+
     fillStreamArea() {
       const streamPlayers = this.$el.querySelectorAll("#stream-area .stream");
       const maxWidth = this.$el.querySelector("#stream-area").offsetWidth;

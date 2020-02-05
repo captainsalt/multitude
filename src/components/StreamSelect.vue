@@ -65,10 +65,18 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn v-if="username" block>
+          <v-btn
+            v-if="username"
+            block
+            @click="logout"
+          >
             Logout
           </v-btn>
-          <v-btn v-else block>
+          <v-btn
+            v-else
+            href="/login"
+            block
+          >
             Login
           </v-btn>
         </div>
@@ -79,6 +87,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import * as twitch from "@/services/twitch-service.js";
 
 export default {
   data() {
@@ -103,6 +112,13 @@ export default {
       set(val) {
         this.$store.commit("setSelectedChannels", val);
       }
+    }
+  },
+  methods: {
+    async logout() {
+      this.$store.dispatch("clearAuth");
+      await twitch.revokeToken();
+      location.reload();
     }
   }
 };
