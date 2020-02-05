@@ -8,6 +8,13 @@
       <v-icon>mdi-menu</v-icon>
     </v-btn>
 
+    <div
+      v-if="!selectedChannels.length"
+      class="d-flex justify-center"
+    >
+      <WelcomeAlert/>
+    </div>
+
     <div id="area-container" v-resize="setContainerHeight">
       <div id="stream-area" v-resize="fillStreamArea">
         <StreamPlayer
@@ -31,6 +38,7 @@ import * as twitch from "@/services/twitch-service.js";
 import StreamSelect from "@/components/StreamSelect.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
 import ChatPicker from "@/components/ChatPicker.vue";
+import WelcomeAlert from "@/components/WelcomeAlert.vue";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
@@ -38,7 +46,8 @@ export default {
   components: {
     StreamSelect,
     StreamPlayer,
-    ChatPicker
+    ChatPicker,
+    WelcomeAlert
   },
   computed: {
     ...mapGetters([
