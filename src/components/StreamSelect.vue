@@ -62,6 +62,17 @@
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
+
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn v-if="username" block>
+            Logout
+          </v-btn>
+          <v-btn v-else block>
+            Login
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
   </nav>
 </template>
