@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn @click="displayStreamSelect">
+    <!-- <v-btn @click="displayStreamSelect">
       Show
     </v-btn>
     <v-btn href="/login">
@@ -8,6 +8,14 @@
     </v-btn>
     <v-btn @click="logout">
       Logout
+    </v-btn> -->
+
+    <v-btn
+      class="primary"
+      icon
+      @click="displayStreamSelect"
+    >
+      <v-icon>mdi-menu</v-icon>
     </v-btn>
 
     <div id="area-container" v-resize="setContainerHeight">
