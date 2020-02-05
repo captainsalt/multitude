@@ -1,14 +1,19 @@
 <template>
   <div>
-    <v-btn @click="displayStreamSelect">
-      Show
+    <v-btn
+      class="primary"
+      icon
+      @click="displayStreamSelect"
+    >
+      <v-icon>mdi-menu</v-icon>
     </v-btn>
-    <v-btn href="/login">
-      Login
-    </v-btn>
-    <v-btn @click="logout">
-      Logout
-    </v-btn>
+
+    <div
+      v-if="!selectedChannels.length"
+      class="d-flex justify-center"
+    >
+      <WelcomeAlert/>
+    </div>
 
     <div id="area-container" v-resize="setContainerHeight">
       <div id="stream-area" v-resize="fillStreamArea">
@@ -33,6 +38,7 @@ import * as twitch from "@/services/twitch-service.js";
 import StreamSelect from "@/components/StreamSelect.vue";
 import StreamPlayer from "@/components/StreamPlayer.vue";
 import ChatPicker from "@/components/ChatPicker.vue";
+import WelcomeAlert from "@/components/WelcomeAlert.vue";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
@@ -40,12 +46,8 @@ export default {
   components: {
     StreamSelect,
     StreamPlayer,
-    ChatPicker
-  },
-  data() {
-    return {
-      refreshInterval: null
-    };
+    ChatPicker,
+    WelcomeAlert
   },
   computed: {
     ...mapGetters([
@@ -64,7 +66,7 @@ export default {
     if (await twitch.isAuthenticated()) {
       await this.getUserInfo();
       await this.getLiveChannels();
-      this.refreshInterval = setInterval(() => {
+      setInterval(() => {
         this.getLiveChannels();
       }, 60000);
     }
@@ -101,13 +103,7 @@ export default {
       areaContainer.style.height = `calc(100vh - ${areaContainer.offsetTop}px - 12px)`;
       areaContainer.style.width = "calc(100vw - 24px)";
     },
-    async logout() {
-      clearInterval(this.refreshInterval);
-      this.refreshInterval = null;
-      this.$store.dispatch("clearAuth");
-      await twitch.revokeToken();
-      location.reload();
-    },
+
     fillStreamArea() {
       const streamPlayers = this.$el.querySelectorAll("#stream-area .stream");
       const maxWidth = this.$el.querySelector("#stream-area").offsetWidth;

@@ -5,7 +5,7 @@
       absolute
       temporary
     >
-      <v-list-item>
+      <v-list-item v-if="username">
         <v-list-item-avatar>
           <v-img :src="pictureUrl || require('@/assets/default-profile.png')"/>
         </v-list-item-avatar>
@@ -62,12 +62,32 @@
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
+
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn
+            v-if="username"
+            block
+            @click="logout"
+          >
+            Logout
+          </v-btn>
+          <v-btn
+            v-else
+            href="/login"
+            block
+          >
+            Login
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
   </nav>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import * as twitch from "@/services/twitch-service.js";
 
 export default {
   data() {
@@ -92,6 +112,13 @@ export default {
       set(val) {
         this.$store.commit("setSelectedChannels", val);
       }
+    }
+  },
+  methods: {
+    async logout() {
+      this.$store.dispatch("clearAuth");
+      await twitch.revokeToken();
+      location.reload();
     }
   }
 };
