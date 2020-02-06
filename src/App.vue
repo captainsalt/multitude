@@ -16,4 +16,12 @@ export default {
 html, body {
   overflow-y: hidden !important;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #282828;
+}
 </style>
