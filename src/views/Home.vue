@@ -103,7 +103,6 @@ export default {
       areaContainer.style.height = `calc(100vh - ${areaContainer.offsetTop}px - 12px)`;
       areaContainer.style.width = "calc(100vw - 24px)";
     },
-
     fillStreamArea() {
       const streamPlayers = this.$el.querySelectorAll("#stream-area .stream");
       const maxWidth = this.$el.querySelector("#stream-area").offsetWidth;
