@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <v-btn block @click="oauth">
+  <div class="button-container d-flex justify-center align-center">
+    <v-btn
+      class="primary"
+      x-large
+      @click="oauth"
+    >
       Log in with Twitch
     </v-btn>
   </div>
@@ -19,4 +23,7 @@ export default {
 </script>
 
 <style>
+.button-container {
+  height: 100vh;
+}
 </style>
