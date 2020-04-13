@@ -9,7 +9,7 @@ const twitchApiClient = axios.create({
   }
 });
 
-const getFollowedStreams = (fromId, cursor) => {
+export function getFollowedStreams(fromId, cursor) {
   let requestUrl = `/users/follows?first=100&from_id=${fromId}`;
 
   if (cursor) {
@@ -17,22 +17,23 @@ const getFollowedStreams = (fromId, cursor) => {
   }
 
   return twitchApiClient.get(requestUrl);
-};
+}
 
-const getStreamStatus = followedStreams => {
+export function getStreamStatus(followedStreams) {
   const query = followedStreams
     .map(followedStream => `user_id=${followedStream.to_id}`)
     .join("&");
 
   return twitchApiClient.get(`/streams?${query}`);
-};
+}
 
-export const getUserInfo = () =>
-  axios.get("https://id.twitch.tv/oauth2/userinfo", {
+export function getUserInfo() {
+  return axios.get("https://id.twitch.tv/oauth2/userinfo", {
     headers: {
       Authorization: `Bearer ${store.state.auth.accessToken}`
     }
   });
+}
 
 export async function getLiveChannels() {
   const id = store.state.auth.userId;
@@ -61,16 +62,17 @@ export async function getLiveChannels() {
   return channels;
 }
 
-export const setAccessToken = token => {
+export function setAccessToken(token) {
   twitchApiClient.defaults.headers = {
     Authorization: `Bearer ${token}`
   };
-};
+}
 
-export const revokeToken = async () =>
+export function revokeToken() {
   axios.post(`https://id.twitch.tv/oauth2/revoke?client_id=${process.env.VUE_APP_CLIENT_ID}&token=${store.state.auth.accessToken}`);
+}
 
-export const isAuthenticated = async () => {
+export async function isAuthenticated() {
   try {
     await axios.get("https://id.twitch.tv/oauth2/validate", {
       headers: {
@@ -84,4 +86,4 @@ export const isAuthenticated = async () => {
     store.dispatch("auth/clearAuth");
     return false;
   }
-};
+}
