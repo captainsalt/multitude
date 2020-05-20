@@ -12,9 +12,8 @@ const twitchApiClient = axios.create({
 export function getFollowedStreams(fromId, cursor) {
   let requestUrl = `/users/follows?first=100&from_id=${fromId}`;
 
-  if (cursor) {
+  if (cursor)
     requestUrl = `${requestUrl}&after=${cursor}`;
-  }
 
   return twitchApiClient.get(requestUrl);
 }
@@ -54,9 +53,8 @@ export async function getLiveChannels() {
 
     channels = channels.concat(liveChannels);
 
-    if (followData.length < 100) {
+    if (followData.length < 100)
       break;
-    }
   }
 
   return channels;

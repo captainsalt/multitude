@@ -6,12 +6,11 @@ import { isAuthenticated } from "@/services/twitch-service.js";
 Vue.use(VueRouter);
 
 async function redirectIfAuth(to, from, next) {
-  if (await isAuthenticated()) {
+  if (await isAuthenticated())
     next("/");
-  }
-  else {
+
+  else
     next();
-  }
 }
 
 const routes = [
