@@ -44,15 +44,13 @@ export default {
   watch: {
     // Select first chat if users removes the current selected chat
     selectedChat(val) {
-      if (!val) {
+      if (!val)
         this.selectedChat = this.selectedChannels[0];
-      }
     },
     // Auto select the chat for the first stream added
     selectedChannels(streamers) {
-      if (!this.selectedChat) {
+      if (!this.selectedChat)
         this.selectedChat = streamers[0];
-      }
     }
   },
   methods: {

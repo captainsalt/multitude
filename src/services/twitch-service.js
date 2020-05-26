@@ -12,9 +12,8 @@ const twitchApiClient = axios.create({
 export function getFollowedStreams(fromId, cursor) {
   let requestUrl = `/users/follows?first=100&from_id=${fromId}`;
 
-  if (cursor) {
+  if (cursor)
     requestUrl = `${requestUrl}&after=${cursor}`;
-  }
 
   return twitchApiClient.get(requestUrl);
 }
@@ -54,9 +53,8 @@ export async function getLiveChannels() {
 
     channels = channels.concat(liveChannels);
 
-    if (followData.length < 100) {
+    if (followData.length < 100)
       break;
-    }
   }
 
   return channels;
@@ -73,17 +71,9 @@ export function revokeToken() {
 }
 
 export async function isAuthenticated() {
-  try {
-    await axios.get("https://id.twitch.tv/oauth2/validate", {
-      headers: {
-        Authorization: `OAuth ${store.state.auth.accessToken}`
-      }
-    });
-
+  if (store.state.auth.accessToken)
     return true;
-  }
-  catch (error) {
-    store.dispatch("auth/clearAuth");
-    return false;
-  }
+
+  await store.dispatch("auth/clearAuth");
+  return false;
 }
