@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Cookies from "js-cookie";
 import createPersistedState from "vuex-persistedstate";
 import auth from "./auth.js";
 
@@ -9,7 +10,12 @@ const persistStatePlugin = createPersistedState({
   paths: [
     "auth.accessToken",
     "auth.idToken"
-  ]
+  ],
+  storage: {
+    getItem: key => Cookies.get(key),
+    setItem: (key, value) => Cookies.set(key, value, { expires: 7 }),
+    removeItem: key => Cookies.remove(key)
+  }
 });
 
 export default new Vuex.Store({

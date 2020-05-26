@@ -71,17 +71,9 @@ export function revokeToken() {
 }
 
 export async function isAuthenticated() {
-  try {
-    await axios.get("https://id.twitch.tv/oauth2/validate", {
-      headers: {
-        Authorization: `OAuth ${store.state.auth.accessToken}`
-      }
-    });
-
+  if (store.state.auth.accessToken)
     return true;
-  }
-  catch (error) {
-    store.dispatch("auth/clearAuth");
-    return false;
-  }
+
+  await store.dispatch("auth/clearAuth");
+  return false;
 }
