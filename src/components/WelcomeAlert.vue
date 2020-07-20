@@ -32,7 +32,7 @@
 export default {
   data() {
     return {
-      exampleUrl: `${window.location.origin}/captainsalt/nairomk/dallas`
+      exampleUrl: `${window.location.origin}/captainsalt/bobross/dallas`
     };
   }
 };
