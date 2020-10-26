@@ -26,7 +26,7 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
-    "eslint-config-holo": "^1.0.1",
+    "eslint-config-holo": "^1.0.7",
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.19.0",
