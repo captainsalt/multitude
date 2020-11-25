@@ -117,7 +117,6 @@ export default {
   methods: {
     async logout() {
       this.$store.dispatch("clearAuth");
-      await twitch.revokeToken();
       location.reload();
     }
   }

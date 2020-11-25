@@ -1,5 +1,3 @@
-import { revokeToken } from "@/services/twitch-service.js";
-
 export default {
   namespaced: true,
   state: {
@@ -31,9 +29,7 @@ export default {
       commit("setUsername", preferred_username);
       commit("setPicureUrl", picture);
     },
-    async clearAuth({ commit }) {
-      await revokeToken();
-
+    clearAuth({ commit }) {
       commit("setAccessToken", null);
       commit("setIdToken", null);
       commit("setUserId", null);

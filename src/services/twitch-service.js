@@ -60,10 +60,6 @@ export async function getLiveChannels() {
   return channels;
 }
 
-export function revokeToken() {
-  axios.post(`https://id.twitch.tv/oauth2/revoke?client_id=${process.env.VUE_APP_CLIENT_ID}&token=${store.state.auth.accessToken}`);
-}
-
 export async function isAuthenticated() {
   if (store.state.auth.accessToken)
     return true;
