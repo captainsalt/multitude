@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "@/store/index";
 
-const twitchApiClient = axios.create({
+const getAxiosConfig = () => ({
   baseURL: "https://api.twitch.tv/helix",
   headers: {
     "Client-ID": process.env.VUE_APP_CLIENT_ID,
@@ -15,7 +15,7 @@ export function getFollowedStreams(fromId, cursor) {
   if (cursor)
     requestUrl = `${requestUrl}&after=${cursor}`;
 
-  return twitchApiClient.get(requestUrl);
+  return axios.get(requestUrl, getAxiosConfig());
 }
 
 export function getStreamStatus(followedStreams) {
@@ -23,7 +23,7 @@ export function getStreamStatus(followedStreams) {
     .map(followedStream => `user_id=${followedStream.to_id}`)
     .join("&");
 
-  return twitchApiClient.get(`/streams?${query}`);
+  return axios.get(`/streams?${query}`, getAxiosConfig());
 }
 
 export function getUserInfo() {
@@ -58,12 +58,6 @@ export async function getLiveChannels() {
   }
 
   return channels;
-}
-
-export function setAccessToken(token) {
-  twitchApiClient.defaults.headers = {
-    Authorization: `Bearer ${token}`
-  };
 }
 
 export function revokeToken() {
