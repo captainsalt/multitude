@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     async logout() {
-      this.$store.dispatch("clearAuth");
+      this.$store.dispatch("auth/clearAuth");
       location.reload();
     }
   }
