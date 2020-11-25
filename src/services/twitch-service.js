@@ -9,7 +9,7 @@ const getAxiosConfig = () => ({
   }
 });
 
-export function getFollowedStreams(fromId, cursor) {
+function getFollowedStreams(fromId, cursor) {
   let requestUrl = `/users/follows?first=100&from_id=${fromId}`;
 
   if (cursor)
@@ -18,7 +18,7 @@ export function getFollowedStreams(fromId, cursor) {
   return axios.get(requestUrl, getAxiosConfig());
 }
 
-export function getStreamStatus(followedStreams) {
+function getStreamStatus(followedStreams) {
   const query = followedStreams
     .map(followedStream => `user_id=${followedStream.to_id}`)
     .join("&");
