@@ -3480,10 +3480,10 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-holo@^1.0.29:
-  version "1.0.29"
-  resolved "https://registry.yarnpkg.com/eslint-config-holo/-/eslint-config-holo-1.0.29.tgz#def31c3d259791c16cf0d91145f643ee1920ff1f"
-  integrity sha512-PDx8yDuL4M+NwELNg1YuveDIrkjcdT9t5g+iKCNWzD9SSKwTKYLxbKN1E212sxzulx9QBpOeuY1fUxEkRIPeIA==
+eslint-config-holo@^1.0.30:
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/eslint-config-holo/-/eslint-config-holo-1.0.30.tgz#081c6ed93c7788beae840c16d8e2a2215f81584e"
+  integrity sha512-wOAQMvwWrJeIMVK7USrhrjtHm7+5uc1jYcMLdXmxGULck7bpbHb/hWZk8ylbJaHEk3RyT1OxIxAMeQeyDTwRPg==
 
 eslint-config-standard@^12.0.0:
   version "12.0.0"
