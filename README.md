@@ -1,7 +1,7 @@
 # multitude
 Multitude allows you to view multiple twitch streams at once! 
 
-Visit https://www.multitude.dev for more info
+Visit https://multitude.netlify.app for more info
 
 ## Project setup
 ```
