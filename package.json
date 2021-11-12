@@ -27,7 +27,7 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-config-holo": "^1.0.30",
-    "eslint-plugin-only-warn": "^1.0.2",
+    "eslint-plugin-only-warn": "^1.0.3",
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.43.4",
     "sass-loader": "^10.1.1",
