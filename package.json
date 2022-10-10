@@ -30,7 +30,7 @@
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.43.4",
-    "sass-loader": "^10.1.1",
+    "sass-loader": "^13.1.0",
     "vue-cli-plugin-vuetify": "^2.4.0",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.7.2"
